@@ -13,12 +13,17 @@ app.use(cors());
 app.use(bodyParser.json());
 const port = 5000
 
+app.get('/', (req, res) => {
+  res.send('Hello mongo working with heroku!')
+})
 
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const productsCollection = client.db("emaJohnStore").collection("products");
   const ordersCollection = client.db("emaJohnStore").collection("orders");
+
+  
 
   app.post('/addProduct',(req,res)=>{
     const products = req.body;
